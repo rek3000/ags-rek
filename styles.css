@@ -1,0 +1,91 @@
+.main-box {
+  margin-left: 6px;
+  margin-right: 6px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+.volume-slider {
+  padding-left: 10px;
+  padding-right: 10px;
+  min-width: 100px;
+}
+
+.volume-slider slider {
+  background-color: @theme_bg_color;
+}
+
+.volume-slider slider:hover {
+  background-color: @theme_selected_fg_color;
+}
+
+.battery levelbar {
+  min-width: 100px;
+}
+
+.battery-progress {
+}
+
+/*WORKSPACE*/
+.workspaces {
+  padding: 3px;
+}
+
+/* .workspaces button { */
+/*   margin: 5px; */
+/* } */
+
+button  {
+    min-width: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    /* background-color: transparent; */
+}
+button * {
+  /* background-color: green; */
+  /* padding: 2px; */
+}
+button:active {
+  /* background-color: coral; */
+  background-color: @theme_selected_bg_color;
+}
+button:hover {
+  /* margin-bottom: 3px; */
+  border-bottom: 3px solid @theme_fg_color;
+}
+
+.workspaces button:hover {
+  font-style: italic;
+  color: lightcoral;
+}
+
+.workspaces button.focused {
+  color: @theme_selected_fg_color;
+  font-weight: bold;
+  border-bottom: 3px solid @theme_selected_bg_color
+}
+/**/
+
+.client-title {
+}
+
+.bar {
+}
+
+.volumeReveal {
+  background-color: @theme_bg_color;
+  border: 1px solid @unfocused_borders;
+  border-radius: 2px;
+  font-size: 10px;
+  /* padding-left: 2px; */
+  /* padding-right: 2px; */
+}
+
+.volumeReveal:hover {
+  border: 1px solid @theme_selected_bg_color;
+  border-bottom: 3px solid @theme_fg_color;
+}
+.volumeBox {
+  padding-left: 4px;
+  padding-right: 4px;
+}
