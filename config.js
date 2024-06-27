@@ -73,7 +73,13 @@ function workspaces(monitor=0) {
           }
         }),
         // className: emepheralActiveId.as(id => `${id === i ? "focused" : ""}`),
-        onClicked: () => dispatch(i),
+        onClicked: () => {
+          if (monitor === 0) {
+            dispatch(i);
+          } else {
+            dispatch(i + 10*monitor);
+          }
+        } ,
       })),
 
       // remove this setup hook if you want fixed number of buttons
