@@ -3,19 +3,31 @@ const battery = await Service.import('battery');
 const { speaker } = await Service.import("audio");
 const systemtray = await Service.import("systemtray")
 
-
 function batteryBox() {
   const value = battery.bind("percent").as(p => p > 0 ? p / 100 : 0)
   const icon = battery.bind("percent").as(p =>
     `battery-level-${Math.floor(p / 10) * 10}-symbolic`)
+  const label = value.toString();
+  // console.log(value);
 
   return Widget.Box({
     class_name: "battery",
     visible: battery.bind("available"),
     children: [
-      Widget.Icon({ icon }),
+      Widget.Icon({
+        icon,
+        class_name: "battery-icon"
+      }),
+      // Widget.Label({
+      //   class_name: "battery-title",
+      //   // truncate: 'end',
+      //   // maxWidthChars: 50,
+      //   label: value,
+      // }),
       Widget.LevelBar({
-        widthRequest: 100,
+        class_name: "battery-level",
+        widthRequest: 50,
+        bar_mode: "continuous",
         vpack: "center",
         value,
       }),
@@ -39,8 +51,12 @@ function sysTray() {
 }
 
 const dispatch = ws => hyprland.messageAsync(`dispatch workspace ${ws}`);
-function workspaces() {
+function workspaces(monitor=0) {
   const activeId = hyprland.active.workspace.bind("id");
+  const emepheralActiveId =  activeId - 10;
+  // const mon = hyprland.getMonitor(1); 
+  // console.log(mon);
+  // console.log(activeId);
   return Widget.EventBox({
     onScrollUp: () => dispatch('+1'),
     onScrollDown: () => dispatch('-1'),
@@ -49,13 +65,24 @@ function workspaces() {
       children: Array.from({ length: 10 }, (_, i) => i + 1).map(i => Widget.Button({
         attribute: i,
         label: `${i}`,
-        className: activeId.as(id => `${id === i ? "focused" : ""}`),
+        className: activeId.as(id => {
+          if (monitor === 0) {
+           return `${id === i ? "focused" : ""}`;
+          } else {
+           return `${id - 10*monitor === i ? "focused" : ""}`
+          }
+        }),
+        // className: emepheralActiveId.as(id => `${id === i ? "focused" : ""}`),
         onClicked: () => dispatch(i),
       })),
 
       // remove this setup hook if you want fixed number of buttons
       setup: self => self.hook(hyprland, () => self.children.forEach(btn => {
-        btn.visible = hyprland.workspaces.some(ws => ws.id === btn.attribute);
+        if (monitor === 0) {
+          btn.visible = hyprland.workspaces.some(ws => ws.id === btn.attribute);
+        } else {
+          btn.visible = hyprland.workspaces.some(ws => ws.id - 10*monitor === btn.attribute);
+        }
       })),
     }),
   })
@@ -68,7 +95,7 @@ function clientTitle() {
     maxWidthChars: 50,
     label: hyprland.active.client.bind('title'),
     visible: hyprland.active.client.bind('address')
-    .as(addr => !!addr),
+      .as(addr => !!addr),
   })
 }
 
@@ -89,7 +116,7 @@ function volumeBar() {
 }
 
 function reveal() {
-  let reveal =  Widget.Revealer({
+  let reveal = Widget.Revealer({
     revealChild: false,
     transitionDuration: 800,
     transition: 'slide_right',
@@ -109,11 +136,11 @@ function reveal() {
     child: box,
     onHover: self => {
       self.child.children[1].reveal_child = true;
-    }, 
+    },
     onHoverLost: self => {
-      self.child.children[1].reveal_child = false; 
-    }, 
-})
+      self.child.children[1].reveal_child = false;
+    },
+  })
 
   return eventBox;
 }
@@ -148,11 +175,11 @@ const text_demo = Widget.Label({
   label: "Lazy mode",
 });
 
-function leftPart() {
+function leftPart(monitor=0) {
   return Widget.Box({
     spacing: 8,
     children: [
-      workspaces(),
+      workspaces(monitor),
     ]
   })
 }
@@ -188,7 +215,7 @@ function Bar(monitor = 0) {
     exclusivity: 'exclusive',
     child: Widget.CenterBox({
       className: "main-box",
-      start_widget: leftPart(),
+      start_widget: leftPart(monitor),
       center_widget: centerPart(),
       end_widget: rightPart(),
     }),
@@ -200,7 +227,7 @@ function Bar(monitor = 0) {
 App.config({
   windows: [
     Bar(0),
-    // Bar(1),
+    Bar(1),
   ],
   style: './styles.css',
 })
@@ -214,3 +241,5 @@ Utils.monitorFile(
   },
 )
 
+
+export { }

@@ -18,13 +18,35 @@
   background-color: @theme_selected_fg_color;
 }
 
-.battery levelbar {
-  min-width: 100px;
+
+/*BATTERY*/
+.battery-icon {
+  padding: 0 1px;
+  font-size: 1.5rem;
 }
 
-.battery-progress {
+.battery-level {
+  /* -gtk-icon-palette: warning rgb(246,116,0), success @theme_selected_bg_color, error rgb(218,68,83); */
 }
 
+.battery-level trough {
+  /* -gtk-icon-palette: warning rgb(246,116,0), success @theme_selected_bg_color, error rgb(218,68,83); */
+}
+
+.battery-level trough block.empty{
+  /* -gtk-icon-palette: warning rgb(246,116,0), success @theme_selected_bg_color, error rgb(218,68,83); */
+  /* background-color: coral; */
+  /* background-color: red; */
+  /* border: 0px solid @theme_selected_bg_color; */
+  /* margin: 2px; */
+}
+
+.battery-level trough block.filled {
+  /* border: 0px solid @theme_selected_bg_color; */
+  /* -gtk-icon-palette: warning rgb(246,116,0), success @theme_selected_bg_color, error rgb(218,68,83); */
+  /* color: red; */
+  /* margin: 2px; */
+}
 /*WORKSPACE*/
 .workspaces {
   padding: 3px;
@@ -62,7 +84,7 @@ button:hover {
 .workspaces button.focused {
   color: @theme_selected_fg_color;
   font-weight: bold;
-  border-bottom: 3px solid @theme_selected_bg_color
+  border-bottom: 3px solid @theme_selected_bg_color;
 }
 /**/
 
