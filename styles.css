@@ -107,11 +107,23 @@ button:hover {
   color: lightcoral;
 }
 
+.workspaces button {
+  color: @theme_bg_color;
+}
 .workspaces button.focused {
   color: @theme_selected_fg_color;
   font-weight: bold;
+  font-style: italic;
   border-bottom: 3px solid @theme_selected_bg_color;
 }
+
+.workspaces button.unfocused.occupied {
+  color: lightcoral;
+}
+
+/* .workspaces button.focused-occupied { */
+/*   color: lightcoral; */
+/* } */
 /**/
 
 

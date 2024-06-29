@@ -82,13 +82,34 @@ function workspaces(monitor = 0) {
         attribute: i,
         label: `${i}`,
         className: activeId.as(id => {
+          let status = "";
+          let ws;
           if (monitor === 0) {
-            return `${id === i ? "focused" : ""}`;
+            ws = hyprland.getWorkspace(i);
           } else {
-            return `${id - 10 * monitor === i ? "focused" : ""}`
+            ws = hyprland.getWorkspace(i + 10 * monitor);
           }
+          if (monitor === 0) {
+            if (id === i) {
+              status = "focused";
+            } else {
+              status = "unfocused";
+            }
+          } else {
+            if (id - 10 * monitor === i) {
+              status = "focused";
+            } else {
+              status = "unfocused";
+            }
+          }
+
+          if (typeof ws !== "undefined") {
+            if (ws.windows > 0) {
+              status = status + " occupied";
+            }
+          }
+          return status;
         }),
-        // className: emepheralActiveId.as(id => `${id === i ? "focused" : ""}`),
         onClicked: () => {
           if (monitor === 0) {
             dispatch(i);
@@ -99,13 +120,13 @@ function workspaces(monitor = 0) {
       })),
 
       // remove this setup hook if you want fixed number of buttons
-      setup: self => self.hook(hyprland, () => self.children.forEach(btn => {
-        if (monitor === 0) {
-          btn.visible = hyprland.workspaces.some(ws => ws.id === btn.attribute);
-        } else {
-          btn.visible = hyprland.workspaces.some(ws => ws.id - 10 * monitor === btn.attribute);
-        }
-      })),
+      // setup: self => self.hook(hyprland, () => self.children.forEach(btn => {
+      //   if (monitor === 0) {
+      //     btn.visible = hyprland.workspaces.some(ws => ws.id === btn.attribute);
+      //   } else {
+      //     btn.visible = hyprland.workspaces.some(ws => ws.id - 10 * monitor === btn.attribute);
+      //   }
+      // })),
     }),
   })
 }
@@ -157,7 +178,7 @@ function reveal() {
     className: 'volumeReveal',
     child: box,
     onHover: self => {
-        self.child.children[1].revealChild = true;
+      self.child.children[1].revealChild = true;
     },
     onHoverLost: self => {
       self.child.children[1].revealChild = false;
