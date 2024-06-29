@@ -1,7 +1,11 @@
+/* @define-color color0 #121212; */
+@import url("colorscheme.css");
+
+/* GENERAL */
 window {
   background: transparent;
-  /* padding: 5px; */
 }
+
 .main-box {
   padding-left: 6px;
   padding-right: 6px;
@@ -23,10 +27,105 @@ window {
   background-color: @theme_selected_fg_color;
 }
 
+button  {
+    all: unset;
+    min-width: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+button:active {
+  background-color: @color2;
+}
+
+button:hover {
+  /* margin-bottom: 3px; */
+  border-bottom: 3px solid @color7;
+}
+
+/* WORKSPACE */
+.ws-container {
+}
+
+.workspaces {
+}
+
+.workspaces button:hover {
+  font-style: italic;
+  color: lightcoral;
+  border: 1px solid @color4;
+  border-bottom: 3px solid @color7;
+  transition: border 0.2s ease-in-out;
+}
+
+.workspaces button:active {
+  background-color: @color2;
+}
+
+.workspaces button {
+  all: unset;
+  padding: 0 5px;
+  margin: 0 1px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: @color14;
+  background-color: @color0;
+}
+
+.workspaces button.focused {
+  background-color: @color8;
+  color: @color7;
+  font-weight: bold;
+  font-style: italic;
+  border: 1px solid @color4;
+  border-bottom: 3px solid @color4;
+}
+
+.workspaces button.unfocused.occupied {
+  color: @color2;
+}
+
+.workspaces-btn-container {
+  background-color: @color0;
+  padding: 6px;
+  padding-left: 18px;
+  padding-right: 18px;
+  border-radius: 14px;
+}
+
+
+/* SYSTEM TRAY */
+.systray-container {
+  background-color: @color0;
+  padding: 6px;
+  padding-left: 18px;
+  padding-right: 18px;
+  border-radius: 14px;
+}
+
+.systray-container button {
+  all: unset;
+  border: 1px solid transparent;
+  border-bottom: 3px solid transparent;
+  padding: 2px;
+}
+
+.systray-container button:hover {
+  border-radius: 8px;
+  transition: border 0.2s ease-in-out;
+  border: 1px solid @color4;
+  border-bottom: 3px solid @color7;
+}
+
+.systray-container button * {
+  font-size: 1.5rem;
+}
+
 
 /*BATTERY*/
 .battery {
-  background-color: #121212;
+  background-color: @color0;
   padding: 6px;
   padding-left: 18px;
   padding-right: 18px;
@@ -38,102 +137,37 @@ window {
   font-size: 1.5rem;
 }
 
+.battery-btn {
+  padding: 0 5px;
+  background-color: @color8;
+  margin: 0 1px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+}
+
+.battery-btn:hover {
+  border: 1px solid @color4;
+  border-bottom: 3px solid @color7;
+}
 .battery-level {
-  /* -gtk-icon-palette: warning rgb(246,116,0), success @theme_selected_bg_color, error rgb(218,68,83); */
 }
 
 .battery-level trough {
-  /* -gtk-icon-palette: warning rgb(246,116,0), success @theme_selected_bg_color, error rgb(218,68,83); */
 }
 
 .battery-level trough block.empty{
-  /* -gtk-icon-palette: warning rgb(246,116,0), success @theme_selected_bg_color, error rgb(218,68,83); */
-  /* background-color: coral; */
-  /* background-color: red; */
-  /* border: 0px solid @theme_selected_bg_color; */
-  /* margin: 2px; */
 }
 
 .battery-level trough block.filled {
-  /* border: 0px solid @theme_selected_bg_color; */
-  /* -gtk-icon-palette: warning rgb(246,116,0), success @theme_selected_bg_color, error rgb(218,68,83); */
-  /* color: red; */
-  /* margin: 2px; */
-}
-/*WORKSPACE*/
-.ws-container {
 }
 
-.btn-container {
-  background-color: #121212;
-  padding: 6px;
-  padding-left: 18px;
-  padding-right: 18px;
-  border-radius: 14px;
-}
 
-.workspaces {
-  /* margin: 5px; */
-}
-
-/* .workspaces button { */
-/*   margin: 5px; */
-/* } */
-
-button  {
-    min-width: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-bottom: 0;
-    /* background-color: transparent; */
-}
-button * {
-  /* background-color: green; */
-  /* padding: 2px; */
-}
-
-button:active {
-  /* background-color: coral; */
-  background-color: @theme_selected_bg_color;
-}
-
-button:hover {
-  /* margin-bottom: 3px; */
-  border-bottom: 3px solid @theme_fg_color;
-}
-
-.workspaces button:hover {
-  font-style: italic;
-  color: lightcoral;
-}
-
-.workspaces button {
-  color: @theme_bg_color;
-}
-.workspaces button.focused {
-  color: @theme_selected_fg_color;
-  font-weight: bold;
-  font-style: italic;
-  border-bottom: 3px solid @theme_selected_bg_color;
-}
-
-.workspaces button.unfocused.occupied {
-  color: lightcoral;
-}
-
-/* .workspaces button.focused-occupied { */
-/*   color: lightcoral; */
-/* } */
-/**/
-
-
+/* VOLUME */
 .volumeReveal {
   background-color: @theme_bg_color;
   border: 1px solid @unfocused_borders;
   border-radius: 5px;
   font-size: 10px;
-  /* padding-left: 2px; */
-  /* padding-right: 2px; */
 }
 
 .volumeReveal:hover {
@@ -146,38 +180,12 @@ button:hover {
   padding-right: 4px;
 }
 
-
+/* TIME DATE */
 .time-container {
-  background-color: #121212;
+  background-color: @color0;
   padding: 6px;
   padding-left: 18px;
   padding-right: 18px;
   border-radius: 14px;
-}
-
-.systray-container {
-  background-color: #121212;
-  padding: 6px;
-  padding-left: 18px;
-  padding-right: 18px;
-  border-radius: 14px;
-}
-
-.systray-container button {
-  all: unset;
-  border: 1px solid #121212;
-  /* padding-left: 2px; */
-  /* padding-right: 2px; */
-  padding: 2px;
-}
-
-.systray-container button:hover {
-  border: 1px solid @theme_selected_bg_color;
-  border-radius: 8px;
-  transition: border 0.2s ease-in-out;
-  /* border-bottom: 3px solid @theme_fg_color; */
-}
-
-.systray-container button * {
-  font-size: 1.5rem;
+  color: @color7;
 }

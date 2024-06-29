@@ -38,13 +38,13 @@ function batteryBox() {
     visible: battery.bind("available"),
     spacing: 2,
     children: [
-      Widget.Icon({
-        icon,
-        class_name: "battery-icon"
-      }),
       Widget.Label({
         class_name: "battery-title",
         label: value.emitter.percent.toString() + "%",
+      }),
+      Widget.Icon({
+        icon,
+        class_name: "battery-icon"
       }),
       button,
     ],
@@ -77,7 +77,7 @@ function workspaces(monitor = 0) {
     className: "workspaces",
     child: Widget.Box({
       spacing: 6,
-      className: "btn-container",
+      className: "workspaces-btn-container",
       children: Array.from({ length: 10 }, (_, i) => i + 1).map(i => Widget.Button({
         attribute: i,
         label: `${i}`,
@@ -215,11 +215,6 @@ function timeLabel() {
   })
 }
 
-const text_demo = Widget.Label({
-  hpack: 'center',
-  label: "Lazy mode",
-});
-
 function leftPart(monitor = 0) {
   return Widget.Box({
     class_name: "ws-container",
@@ -270,7 +265,6 @@ function Bar(monitor = 0) {
     }),
   })
 }
-
 
 
 App.config({
