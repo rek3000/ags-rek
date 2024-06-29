@@ -1,36 +1,52 @@
 const hyprland = await Service.import("hyprland");
 const battery = await Service.import('battery');
 const { speaker } = await Service.import("audio");
-const systemtray = await Service.import("systemtray")
+const systemtray = await Service.import("systemtray");
+const powerProfiles = await Service.import('powerprofiles');
 
 function batteryBox() {
   const value = battery.bind("percent").as(p => p > 0 ? p / 100 : 0)
   const icon = battery.bind("percent").as(p =>
     `battery-level-${Math.floor(p / 10) * 10}-symbolic`)
-  const label = value.toString();
-  // console.log(value);
+  const labelProfile = Widget.Label({
+    label: powerProfiles.active_profile.substring(0, 3),
+    // truncate: 'end',
+    // maxWidthChars: 4,
+  })
+  console.log(powerProfiles.active_profile);
+
+  const button = Widget.Button({
+    class_name: "battery-btn",
+    child: labelProfile,
+    on_clicked: () => {
+      switch (powerProfiles.active_profile) {
+        case 'balanced':
+          powerProfiles.active_profile = 'performance';
+          break;
+        default:
+          powerProfiles.active_profile = 'balanced';
+          break;
+      };
+    },
+    setup: self => self.hook(powerProfiles, self => {
+      self.child.label = powerProfiles.active_profile.substring(0, 3);
+    }),
+  })
 
   return Widget.Box({
     class_name: "battery",
     visible: battery.bind("available"),
+    spacing: 2,
     children: [
       Widget.Icon({
         icon,
         class_name: "battery-icon"
       }),
-      // Widget.Label({
-      //   class_name: "battery-title",
-      //   // truncate: 'end',
-      //   // maxWidthChars: 50,
-      //   label: value,
-      // }),
-      Widget.LevelBar({
-        class_name: "battery-level",
-        widthRequest: 50,
-        bar_mode: "continuous",
-        vpack: "center",
-        value,
+      Widget.Label({
+        class_name: "battery-title",
+        label: value.emitter.percent.toString() + "%",
       }),
+      button,
     ],
   })
 
@@ -47,29 +63,29 @@ function sysTray() {
 
   return Widget.Box({
     children: items,
+    class_name: "systray-container",
+    spacing: 2,
   })
 }
 
 const dispatch = ws => hyprland.messageAsync(`dispatch workspace ${ws}`);
-function workspaces(monitor=0) {
+function workspaces(monitor = 0) {
   const activeId = hyprland.active.workspace.bind("id");
-  const emepheralActiveId =  activeId - 10;
-  // const mon = hyprland.getMonitor(1); 
-  // console.log(mon);
-  // console.log(activeId);
   return Widget.EventBox({
     onScrollUp: () => dispatch('+1'),
     onScrollDown: () => dispatch('-1'),
     className: "workspaces",
     child: Widget.Box({
+      spacing: 6,
+      className: "btn-container",
       children: Array.from({ length: 10 }, (_, i) => i + 1).map(i => Widget.Button({
         attribute: i,
         label: `${i}`,
         className: activeId.as(id => {
           if (monitor === 0) {
-           return `${id === i ? "focused" : ""}`;
+            return `${id === i ? "focused" : ""}`;
           } else {
-           return `${id - 10*monitor === i ? "focused" : ""}`
+            return `${id - 10 * monitor === i ? "focused" : ""}`
           }
         }),
         // className: emepheralActiveId.as(id => `${id === i ? "focused" : ""}`),
@@ -77,9 +93,9 @@ function workspaces(monitor=0) {
           if (monitor === 0) {
             dispatch(i);
           } else {
-            dispatch(i + 10*monitor);
+            dispatch(i + 10 * monitor);
           }
-        } ,
+        },
       })),
 
       // remove this setup hook if you want fixed number of buttons
@@ -87,7 +103,7 @@ function workspaces(monitor=0) {
         if (monitor === 0) {
           btn.visible = hyprland.workspaces.some(ws => ws.id === btn.attribute);
         } else {
-          btn.visible = hyprland.workspaces.some(ws => ws.id - 10*monitor === btn.attribute);
+          btn.visible = hyprland.workspaces.some(ws => ws.id - 10 * monitor === btn.attribute);
         }
       })),
     }),
@@ -125,7 +141,7 @@ function reveal() {
   let reveal = Widget.Revealer({
     revealChild: false,
     transitionDuration: 800,
-    transition: 'slide_right',
+    transition: 'slide_left',
     child: volumeBar(),
   });
 
@@ -141,10 +157,10 @@ function reveal() {
     className: 'volumeReveal',
     child: box,
     onHover: self => {
-      self.child.children[1].reveal_child = true;
+        self.child.children[1].revealChild = true;
     },
     onHoverLost: self => {
-      self.child.children[1].reveal_child = false;
+      self.child.children[1].revealChild = false;
     },
   })
 
@@ -173,17 +189,21 @@ function timeLabel() {
 
   return Widget.Label({
     hpack: 'center',
+    class_name: "time-container",
     label: time.bind(),
   })
 }
+
 const text_demo = Widget.Label({
   hpack: 'center',
   label: "Lazy mode",
 });
 
-function leftPart(monitor=0) {
+function leftPart(monitor = 0) {
   return Widget.Box({
+    class_name: "ws-container",
     spacing: 8,
+    homogeneous: false,
     children: [
       workspaces(monitor),
     ]
@@ -205,7 +225,7 @@ function rightPart() {
     spacing: 8,
     children: [
       // volumeBar(),
-      reveal(),
+      // reveal(),
       sysTray(),
       batteryBox(),
       timeLabel(),
@@ -219,6 +239,8 @@ function Bar(monitor = 0) {
     name: `bar${monitor}`,
     anchor: ['top', 'left', 'right'],
     exclusivity: 'exclusive',
+    margins: [2, 2],
+    layer: "bottom",
     child: Widget.CenterBox({
       className: "main-box",
       start_widget: leftPart(monitor),

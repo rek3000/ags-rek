@@ -1,9 +1,14 @@
-.main-box {
-  margin-left: 6px;
-  margin-right: 6px;
-  padding-bottom: 2px;
-  padding-top: 2px;
+window {
+  background: transparent;
+  /* padding: 5px; */
 }
+.main-box {
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
 .volume-slider {
   padding-left: 10px;
   padding-right: 10px;
@@ -20,6 +25,14 @@
 
 
 /*BATTERY*/
+.battery {
+  background-color: #121212;
+  padding: 6px;
+  padding-left: 18px;
+  padding-right: 18px;
+  border-radius: 14px;
+}
+
 .battery-icon {
   padding: 0 1px;
   font-size: 1.5rem;
@@ -48,8 +61,19 @@
   /* margin: 2px; */
 }
 /*WORKSPACE*/
+.ws-container {
+}
+
+.btn-container {
+  background-color: #121212;
+  padding: 6px;
+  padding-left: 18px;
+  padding-right: 18px;
+  border-radius: 14px;
+}
+
 .workspaces {
-  padding: 3px;
+  /* margin: 5px; */
 }
 
 /* .workspaces button { */
@@ -67,10 +91,12 @@ button * {
   /* background-color: green; */
   /* padding: 2px; */
 }
+
 button:active {
   /* background-color: coral; */
   background-color: @theme_selected_bg_color;
 }
+
 button:hover {
   /* margin-bottom: 3px; */
   border-bottom: 3px solid @theme_fg_color;
@@ -88,16 +114,11 @@ button:hover {
 }
 /**/
 
-.client-title {
-}
-
-.bar {
-}
 
 .volumeReveal {
   background-color: @theme_bg_color;
   border: 1px solid @unfocused_borders;
-  border-radius: 2px;
+  border-radius: 5px;
   font-size: 10px;
   /* padding-left: 2px; */
   /* padding-right: 2px; */
@@ -107,7 +128,44 @@ button:hover {
   border: 1px solid @theme_selected_bg_color;
   border-bottom: 3px solid @theme_fg_color;
 }
+
 .volumeBox {
   padding-left: 4px;
   padding-right: 4px;
+}
+
+
+.time-container {
+  background-color: #121212;
+  padding: 6px;
+  padding-left: 18px;
+  padding-right: 18px;
+  border-radius: 14px;
+}
+
+.systray-container {
+  background-color: #121212;
+  padding: 6px;
+  padding-left: 18px;
+  padding-right: 18px;
+  border-radius: 14px;
+}
+
+.systray-container button {
+  all: unset;
+  border: 1px solid #121212;
+  /* padding-left: 2px; */
+  /* padding-right: 2px; */
+  padding: 2px;
+}
+
+.systray-container button:hover {
+  border: 1px solid @theme_selected_bg_color;
+  border-radius: 8px;
+  transition: border 0.2s ease-in-out;
+  /* border-bottom: 3px solid @theme_fg_color; */
+}
+
+.systray-container button * {
+  font-size: 1.5rem;
 }
