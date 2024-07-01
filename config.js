@@ -6,6 +6,12 @@ const powerProfiles = await Service.import('powerprofiles');
 
 function batteryBox() {
   const value = battery.bind("percent").as(p => p > 0 ? p / 100 : 0)
+  // const percent = Variable("", {
+  //   poll: [30000, () => {
+  //     const value = battery.bind("percent").as(p => p > 0 ? p / 100 : 0)
+  //     return value.emitter.percent.toString() + "%";
+  //   }],
+  // })
   const icon = battery.bind("percent").as(p =>
     `battery-level-${Math.floor(p / 10) * 10}-symbolic`)
   const labelProfile = Widget.Label({
@@ -14,7 +20,7 @@ function batteryBox() {
     // maxWidthChars: 4,
   })
   console.log(powerProfiles.active_profile);
-
+  console.log(battery.bind('percent'));
   const button = Widget.Button({
     class_name: "battery-btn",
     child: labelProfile,
@@ -40,7 +46,7 @@ function batteryBox() {
     children: [
       Widget.Label({
         class_name: "battery-title",
-        label: value.emitter.percent.toString() + "%",
+        label: battery.bind('percent').as(p => p.toString()),
       }),
       Widget.Icon({
         icon,
