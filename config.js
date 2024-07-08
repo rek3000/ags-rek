@@ -77,13 +77,15 @@ function sysTray() {
 const dispatch = ws => hyprland.messageAsync(`dispatch workspace ${ws}`);
 function workspaces(monitor = 0) {
   const activeId = hyprland.active.workspace.bind("id");
-  return Widget.EventBox({
-    onScrollUp: () => dispatch('+1'),
-    onScrollDown: () => dispatch('-1'),
-    className: "workspaces",
-    child: Widget.Box({
+  // return Widget.EventBox({
+  //   onScrollUp: () => dispatch('+1'),
+  //   onScrollDown: () => dispatch('-1'),
+  //   className: "workspaces",
+    // child: Widget.Box({
+    return Widget.Box({
       spacing: 6,
       className: "workspaces-btn-container",
+      // homogeneous: true,
       children: Array.from({ length: 10 }, (_, i) => i + 1).map(i => Widget.Button({
         attribute: i,
         label: `${i}`,
@@ -133,8 +135,8 @@ function workspaces(monitor = 0) {
       //     btn.visible = hyprland.workspaces.some(ws => ws.id - 10 * monitor === btn.attribute);
       //   }
       // })),
-    }),
-  })
+    })
+  // })
 }
 
 function clientTitle() {
@@ -224,16 +226,21 @@ function timeLabel() {
 function leftPart(monitor = 0) {
   return Widget.Box({
     class_name: "ws-container",
+    // hpack: "center",
+    vpack: "center",
+    // homogeneous: true,
     spacing: 8,
-    homogeneous: false,
     children: [
       workspaces(monitor),
     ]
   })
+  // return workspaces(monitor);
 }
 
 function centerPart() {
   return Widget.Box({
+    class_name: "cenber-box",
+    vpack: "center",
     spacing: 8,
     children: [
       clientTitle(),
@@ -244,6 +251,7 @@ function centerPart() {
 function rightPart() {
   return Widget.Box({
     hpack: "end",
+    vpack: "center",
     spacing: 8,
     children: [
       // volumeBar(),
@@ -261,7 +269,7 @@ function Bar(monitor = 0) {
     name: `bar${monitor}`,
     anchor: ['top', 'left', 'right'],
     exclusivity: 'exclusive',
-    margins: [2, 2],
+    margins: [2, 2, 0, 2],
     layer: "bottom",
     child: Widget.CenterBox({
       className: "main-box",
