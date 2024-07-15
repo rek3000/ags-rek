@@ -13,6 +13,7 @@
     "typeRoots": [
       "./types"
     ],
+    // "type": "module",
     "skipLibCheck": true
   }
 }

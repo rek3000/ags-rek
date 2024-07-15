@@ -1,0 +1,135 @@
+/* @define-color color0 #121212; */
+@import url("colorscheme.css");
+
+/* GENERAL */
+window {
+  background: @color0;
+}
+
+.main-box {
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.volume-slider {
+}
+
+.volume-slider slider {
+}
+
+.volume-slider slider:hover {
+}
+
+button  {
+    all: unset;
+    /* min-width: 0; */
+    padding: 3px;
+    /* padding-bottom: 0; */
+    /* margin-bottom: 0; */
+    padding-bottom: 0px;
+    border-bottom: 3px solid transparent;
+}
+
+button:active {
+  background-color: @color2;
+}
+
+button:hover {
+  border-bottom: 3px solid @color7;
+}
+
+/* WORKSPACE */
+.ws-container {
+}
+
+.workspaces-btn-container {
+  border: 3px solid @color5;
+}
+
+.workspaces-btn-container button {
+}
+
+.workspaces-btn-container button:active {
+}
+
+.workspaces-btn-container button.unfocused:hover {
+}
+
+.workspaces-btn-container button.unfocused.occupied {
+  color: @color2;
+}
+
+.workspaces-btn-container button.focused {
+  border-bottom: 3px solid @color4;
+}
+
+
+/* SYSTEM TRAY */
+.systray-container {
+  border: 3px solid @color5;
+}
+
+.systray-container button {
+}
+
+.systray-container button:hover {
+}
+
+.systray-container button * {
+  font-size: 1.5rem;
+}
+
+
+/*BATTERY*/
+.battery {
+  border: 3px solid @color5;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.battery-icon {
+}
+
+.battery-btn {
+}
+
+.battery-btn:hover {
+}
+.battery-level {
+}
+
+.battery-level trough {
+}
+
+.battery-level trough block.empty{
+}
+
+.battery-level trough block.filled {
+}
+
+
+/* VOLUME */
+.volumeReveal {
+}
+
+.volumeReveal:hover {
+}
+
+.volumeBox {
+}
+
+/* TIME DATE */
+.time-container {
+  border: 3px solid @color5;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.cenber-box {
+}
+
+
+.client-title {
+}

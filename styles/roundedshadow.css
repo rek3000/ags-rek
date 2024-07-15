@@ -203,4 +203,14 @@ button:hover {
 }
 
 .cenber-box {
+  background-color: @color0;
+  padding-left: 18px;
+  padding-right: 18px;
+  border-radius: 14px;
+  padding: 6px;
+  box-shadow: 2px 2px 0px 0px @color4;
+}
+
+
+.client-title {
 }
