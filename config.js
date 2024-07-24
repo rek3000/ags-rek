@@ -1,10 +1,12 @@
-import { bar } from './components/bar.js';
+import { bar } from './themes/current/bar.js';
+import PopupWindow from './themes/basic-bar/popupwindow.js';
 
-const stylesheet = `${App.configDir}/styles/current.css`;
+const stylesheet = `${App.configDir}/styles/current/current.css`;
 App.config({
   windows: [
     bar(0),
     bar(1),
+    PopupWindow(),
   ],
   style: stylesheet,
 })

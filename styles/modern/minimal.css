@@ -1,0 +1,163 @@
+/* @define-color color0 #121212; */
+@import url("../colorscheme.css");
+@import url("popupwindow.css");
+
+/* GENERAL */
+window {
+  background: transparent;
+}
+
+.main-box {
+  /* padding-left: 3px; */
+  /* padding-right: 3px; */
+  padding: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  /* margin-top: 3px; */
+  /* margin-bottom: 3px; */
+  background: @color0;
+  border-radius: 10px;
+}
+
+.volume-slider {
+}
+
+.volume-slider slider {
+}
+
+.volume-slider slider:hover {
+}
+
+button  {
+    all: unset;
+    /* min-width: 0; */
+    padding: 3px;
+    /* padding-bottom: 0; */
+    /* margin-bottom: 0; */
+    /* padding-bottom: 0px; */
+    border-bottom: 3px solid transparent;
+}
+
+button:active {
+  background-color: @color2;
+}
+
+button:hover {
+  border-bottom: 3px solid @color7;
+}
+
+/* WORKSPACE */
+.ws-container {
+}
+
+.workspaces-btn-container {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 15px;
+  padding-top: 3px;
+  /* border: 3px solid @color5; */
+  background: @color8;
+}
+
+.workspaces-btn-container button {
+}
+
+.workspaces-btn-container button:active {
+}
+
+.workspaces-btn-container button.unfocused:hover {
+}
+
+.workspaces-btn-container button.unfocused.occupied {
+  color: @color2;
+}
+
+.workspaces-btn-container button.focused {
+  border-bottom: 3px solid @color4;
+}
+
+
+/* SYSTEM TRAY */
+.systray-container {
+  /* border: 3px solid @color5; */
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: @color8;
+  border-radius: 40px 10px 10px 40px;
+}
+
+.systray-container button {
+}
+
+.systray-container button:hover {
+}
+
+.systray-container button * {
+  font-size: 1.5rem;
+}
+
+
+/*BATTERY*/
+.battery {
+  /* border: 3px solid @color5; */
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: @color8;
+  border-radius: 5px;
+}
+
+.battery-icon {
+}
+
+.battery-btn {
+}
+
+.battery-btn:hover {
+}
+.battery-level {
+}
+
+.battery-level trough {
+}
+
+.battery-level trough block.empty{
+}
+
+.battery-level trough block.filled {
+}
+
+
+/* VOLUME */
+.volumeReveal {
+}
+
+.volumeReveal:hover {
+}
+
+.volumeBox {
+}
+
+/* TIME DATE */
+.time-container {
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: @color8;
+  border-radius: 10px 40px 40px 10px;
+}
+
+.cenber-box {
+}
+
+
+.client-title {
+}
+
+.usericon {
+  font-size: 30px;
+}
+.usericon-overlay {
+  /* padding: 10px; */
+  /* border-radius: 7px; */
+  /* border: 5px solid @color0; */
+  background-color: @color0;
+}

@@ -1,13 +1,13 @@
-import { workspaces } from './workspace.js';
-import { clientTitle } from './title.js';
-import { sysTray } from './systray.js';
-import { batteryBox } from './battery.js';
-import { timeLabel } from './time.js';
+import { workspaces } from './components/workspace.js';
+import { clientTitle } from './components/title.js';
+import { sysTray } from './components/systray.js';
+import { batteryBox } from './components/battery.js';
+import { timeLabel } from './components/time.js';
+import { usericon } from './components/usericon.js';
 
 function leftPart(monitor = 0) {
   return Widget.Box({
-    class_name: "ws-container",
-    vpack: "center",
+    class_name: "ws-container", vpack: "center",
     spacing: 8,
     children: [
       workspaces(monitor),
@@ -36,6 +36,7 @@ function rightPart() {
       sysTray(),
       batteryBox(),
       timeLabel(),
+      usericon(),
     ]
   })
 }
@@ -46,7 +47,7 @@ export function bar(monitor = 0) {
     name: `bar${monitor}`,
     anchor: ['top', 'left', 'right'],
     exclusivity: 'exclusive',
-    margins: [2, 2, 0, 2],
+    margins: [4, 20, 0, 20],
     layer: "bottom",
     child: Widget.CenterBox({
       className: "main-box",

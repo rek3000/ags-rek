@@ -1,5 +1,6 @@
 /* @define-color color0 #121212; */
-@import url("colorscheme.css");
+@import url("../colorscheme.css");
+@import url("popupwindow.css");
 
 /* GENERAL */
 window {
