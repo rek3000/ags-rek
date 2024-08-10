@@ -1,5 +1,6 @@
 const username = Utils.exec('whoami')
-const iconPath = `/var/lib/AccountsService/icons/${username}`;
+// const iconPath = `/var/lib/AccountsService/icons/${username}`;
+const iconPath = `/home/rek/.local/share/icons/user.icon`;
 const { Gtk } = imports.gi;
 
 
