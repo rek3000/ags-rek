@@ -8,6 +8,7 @@ export function SysTray() {
     {bind(tray, "items").as(items => items.map(item => (
       <menubutton
         tooltipMarkup={bind(item, "tooltipMarkup")}
+        cursor={"pointer"}
         usePopover={false}
         actionGroup={bind(item, "action_group").as(ag => ["dbusmenu", ag])}
         menuModel={bind(item, "menu_model")}
