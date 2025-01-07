@@ -1,11 +1,11 @@
 import { App } from "astal/gtk3"
-import style from "./style.scss"
-import notifStyle from "./notif-style.scss"
-import Bar from "./widget/Bar"
-import NotificationPopups from "./widget/NotificationPopups"
+import barStyle from "./scss/bar.scss"
+import notifStyle from "./scss/notification.scss"
+import Bar from "./widget/bar/Bar"
+import NotificationPopups from "./widget/notification/NotificationPopups"
 
 App.start({
-  css: style,
+  css: barStyle,
   instanceName: "bar",
   requestHandler(request, res) {
     print(request)

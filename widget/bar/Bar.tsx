@@ -1,11 +1,11 @@
 import { Astal, Gtk, Gdk } from "astal/gtk3"
-import { SysTray } from "./SysTray"
-import { AudioSlider } from "./AudioSlider"
-import { BatteryLevel } from "./BatteryLevel"
-import { Workspaces } from "./Workspaces"
-import { FocusedClient } from "./FocusedClient"
-import { Time } from "./Time"
-import { Media } from "./Media"
+import { SysTray } from "./components/SysTray"
+import { AudioSlider } from "./components/AudioSlider"
+import { BatteryLevel } from "./components/BatteryLevel"
+import { Workspaces } from "./components/Workspaces"
+import { FocusedClient } from "./components/FocusedClient"
+import { Time } from "./components/Time"
+// import { Media } from "./components/Media"
 
 export default function Bar(monitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
